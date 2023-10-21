@@ -114,14 +114,40 @@ if not firebase_admin._apps:
     cred = credentials.Certificate("ec-hack-2023-c35a12353f9e.json")
     firebase_admin.initialize_app(cred)
 
-def sendEmail(to, content):
+def sendEmail(to, content, user='User'):
   try:
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
     server.starttls()
     server.login(st.secrets['from'], st.secrets['pass'])
-    server.sendmail(st.secrets['from'], to, content)
+    message =f"""
+    Subject: Verify Your Account - AccentLingua
+    Hello f{user},
+
+    Thank you for signing up with [Your App Name]! To complete the registration process, please verify your email address.
+
+    To verify your email address, simply click on the link below:
+    {content}
+
+    If you are unable to click on the link, you can copy and paste it into your browser's address bar.
+
+    Verification Link: {content}
+
+    If you did not sign up for AccentLingua, please ignore this email.
+
+    Thank you for choosing AccentLingua. We look forward to having you as a valued member of our community.
+
+    Best regards,
+    Adi
+    AccentLingua
+
+    P.S. If you encounter any issues or need assistance, please don't hesitate to contact our support team at adi1042003adi@gmail.com.
+
+    """
+    server.sendmail(st.secrets['from'], to, message)
     server.close()
+    st.sucess('email sent sucessfully check your email inbox or spam box')
+    st.write(content)
   except:
       st.warning('unable to send mail')
 
@@ -144,7 +170,7 @@ def app():
         try:
             flink = auth.generate_password_reset_link(email)
             sleep(1)
-            sendEmail(email, flink)
+            sendEmail(email, flink, username)
             st.write(flink)
             st.write('Please check your email for password reset instructions or click on the link above')
             st.warning('Password reset link sent to your email')
@@ -167,7 +193,7 @@ def app():
                 link = auth.generate_email_verification_link(email)
                 st.write(link)
                 sleep(1)
-                sendEmail(email, link)
+                sendEmail(email, link, username)
                 st.write('Please check your email for verification instructions or click on the link above')
                 st.warning('Email not verified.')
         except auth.UserNotFoundError:
@@ -195,7 +221,7 @@ def app():
                 user = auth.create_user(email=email, password=password, uid=uid)
                 link = auth.generate_email_verification_link(email)
                 sleep(1)
-                sendEmail(email, link)
+                sendEmail(email, link, username)
                 st.write(link)
                 st.write('Please check your email for verification instructions or click on the link above')
                 st.success('Account created successfully! Please check your email for verification.')
