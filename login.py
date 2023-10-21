@@ -114,14 +114,16 @@ def app():
                 st.session_state.signedout = True
                 st.session_state.signout = True
             else:
-                auth.send_email_verification(user.email)  # Send email verification for existing user
-                st.warning('Email not verified. Please check your email for verification instructions.')
+                link = auth.generate_email_verification_link(email)
+                st.write(link)
+                st.write('Please check your email for verification instructions or click on the link above')
+                st.warning('Email not verified.')
         except auth.UserNotFoundError:
             st.warning('User not found.')
         except auth.EmailAlreadyExistsError:
             st.warning('The email address is already in use.')
         except Exception as e:
-            st.warning('Login Failed. Error: ' + str(e)
+            st.warning('Login Failed. Error: ' + str(e))
 
     def t():
         st.session_state.signout = False
@@ -139,7 +141,6 @@ def app():
             try:
                 uid = str(uuid.uuid4())  # Generate a unique UID
                 user = auth.create_user(email=email, password=password, uid=uid)
-                # Generate the email verification link
                 link = auth.generate_email_verification_link(email)
                 st.write(link)
                 st.write('Please check your email for verification instructions or click on the link above')
@@ -160,4 +161,3 @@ def app():
 
 if __name__ == '__main__':
     app()
-
