@@ -204,7 +204,6 @@ from firebase_admin import auth
 import uuid
 import smtplib
 
-username = '' 
 def header_footer():
     st.markdown('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">', unsafe_allow_html=True)
     st.markdown("""
@@ -378,7 +377,7 @@ def app():
         st.text('Email id: ' + st.session_state.useremail)
         st.success('You are logged in!')
         st.button('Sign out', on_click=t)
-        
+        username = st.session_state.useremail
         # Add your custom content here after the user logs in
         st.header(f'Welcome :yellow[{username}] to :violet[AccentLingua]')
         
