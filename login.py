@@ -79,6 +79,7 @@
 #     app()
 
 
+
 import streamlit as st
 import firebase_admin
 from firebase_admin import credentials
@@ -115,10 +116,12 @@ def app():
             else:
                 auth.send_email_verification(user.email)  # Send email verification for existing user
                 st.warning('Email not verified. Please check your email for verification instructions.')
+        except auth.UserNotFoundError:
+            st.warning('User not found.')
         except auth.EmailAlreadyExistsError:
             st.warning('The email address is already in use.')
-        except:
-            st.warning('Login Failed')
+        except Exception as e:
+            st.warning('Login Failed. Error: ' + str(e)
 
     def t():
         st.session_state.signout = False
@@ -135,19 +138,18 @@ def app():
         if st.button('Create my account'):
             try:
                 uid = str(uuid.uuid4())  # Generate a unique UID
-                # Send an email verification link to the user's email
-                link = auth.generate_email_verification_link(email, action_code_settings=None)
+                user = auth.create_user(email=email, password=password, uid=uid)
+                # Generate the email verification link
+                link = auth.generate_email_verification_link(email)
                 st.write(link)
                 st.write('Please check your email for verification instructions or click on the link above')
-                # Set email_verified to False (user's email is not verified)
-                auth.update_user(user.uid, email_verified=False)
-                user = auth.create_user(email=email, password=password, uid=uid)
-                
                 st.success('Account created successfully! Please check your email for verification.')
                 st.markdown('Please Login using your email and password')
                 st.balloons()
             except auth.EmailAlreadyExistsError:
                 st.warning('The email address is already in use.')
+            except Exception as e:
+                st.warning('Account creation failed. Error: ' + str(e))
     else:
         st.button('Login', on_click=f)
     
@@ -158,3 +160,4 @@ def app():
 
 if __name__ == '__main__':
     app()
+
