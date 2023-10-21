@@ -139,8 +139,6 @@ def app():
     def f():
         try:
             user = auth.get_user_by_email(email)
-            if st.button('forgot password'):
-               forgot_password()
             if user.email_verified:
                 if auth.verify_password(user.uid, password):  # Verify the entered password
                     st.session_state.username = user.uid
@@ -149,6 +147,8 @@ def app():
                     st.session_state.signout = True
                 else:
                     st.warning('Incorrect password')
+                    if st.button('forgot password'):
+                       forgot_password()
             else:
                 link = auth.generate_email_verification_link(email)
                 st.write(link)
