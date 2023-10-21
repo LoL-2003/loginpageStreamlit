@@ -6,7 +6,7 @@ from firebase_admin import auth
 
 
 cred = credentials.Certificate("ec-hack-2023-c35a12353f9e.json")
-firebase_admin.initialize_app(cred)
+#firebase_admin.initialize_app(cred)
 def app():
 # Usernm = []
     st.title('Welcome to :violet[Pondering] :sunglasses:')
