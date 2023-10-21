@@ -105,6 +105,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import auth
 import uuid
+import smtplib                              # use pip install smtplib
 
 # Check if the Firebase Admin SDK is already initialized
 if not firebase_admin._apps:
