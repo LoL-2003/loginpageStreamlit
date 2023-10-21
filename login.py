@@ -247,7 +247,7 @@ def header_footer():
             """
     st.markdown(hide_st_style, unsafe_allow_html=True)
 
-st.set_page_config(page_title="EC_HACKATHON-2023",layout="wide")
+st.set_page_config(page_title="EC_HACKATHON-2023")
 # Check if the Firebase Admin SDK is already initialized
 
 header_footer()
@@ -378,7 +378,7 @@ def app():
         st.button('Sign out', on_click=t)
         username = st.session_state.useremail
         # Add your custom content here after the user logs in
-        st.header(f'Welcome :yellow[{username}] to :violet[AccentLingua]')
+        st.title(f'Welcome :yellow[{username}] to :violet[AccentLingua]')
         
         LANGUAGES = {
             'default(hindi)': 'hi',
@@ -559,7 +559,7 @@ def app():
 
             
         header_footer()
-        st.title('EC HACKATHON 2023')
+        st.header('EC HACKATHON 2023')
         st.write("Select an option:")
         option = st.radio(
             'How would you like to use the bot?',
