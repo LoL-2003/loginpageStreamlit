@@ -6,6 +6,54 @@ import uuid
 import smtplib                            
 from time import sleep
 
+def header_footer():
+    st.markdown('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">', unsafe_allow_html=True)
+    st.markdown("""
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #3498DB;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img 
+          src= 
+    "https://assets-global.website-files.com/5fac161927bf86485ba43fd0/6229d40f625c70840c12bcd7_BlogGif_2.gif" 
+          alt="" width="150" 
+          height="45"></a></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">GitHub</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About Project</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    """, unsafe_allow_html=True)
+    hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            footer:after {content:'Made with ❤️ by ADITYA PURI';visibility: visible;display: block;}
+            .st-emotion-cache-cio0dv {
+            padding-left: 20%;
+            padding-right: 1rem;
+            }
+            header {visibility: hidden;}
+            </style>
+            """
+    st.markdown(hide_st_style, unsafe_allow_html=True)
+
+st.set_page_config(page_title="EC_HACKATHON-2023")
+# Check if the Firebase Admin SDK is already initialized
+
+header_footer()
+
 # Check if the Firebase Admin SDK is already initialized
 if not firebase_admin._apps:
     # Initialize Firebase Admin SDK
