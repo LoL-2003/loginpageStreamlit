@@ -219,7 +219,6 @@ def app():
                 link = auth.generate_email_verification_link(email)
                 sleep(1)
                 sendEmail(email, link, username)
-                firebase_admin.send_custom_email(email, link)
                 st.write('Please check your email for verification instructions or click on the link above')
                 st.success('Account created successfully! Please check your email for verification.')
                 st.markdown('Please Login using your email and password')
