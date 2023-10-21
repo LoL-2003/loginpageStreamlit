@@ -112,6 +112,17 @@ if not firebase_admin._apps:
     cred = credentials.Certificate("ec-hack-2023-c35a12353f9e.json")
     firebase_admin.initialize_app(cred)
 
+def sendEmail(to, content):
+  try:
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.ehlo()
+    server.starttls()
+    server.login(st.secrets[from], st.secrets[pass])
+    server.sendmail(st.secrets[from], to, content)
+    server.close()
+  except:
+      st.warning('unable to send mail')
+
 def app():
     st.title('Welcome to :violet[Pondering] :sunglasses:')
     
@@ -129,8 +140,9 @@ def app():
 
     def forgot_password():
         try:
-            link = auth.generate_password_reset_link(email)
-            st.write(link)
+            flink = auth.generate_password_reset_link(email)
+            sendEmail(email, flink)
+            st.write(flink)
             st.write('Please check your email for password reset instructions or click on the link above')
             st.warning('Password reset link sent to your email')
         except auth.UserNotFoundError:
@@ -151,6 +163,7 @@ def app():
             else:
                 link = auth.generate_email_verification_link(email)
                 st.write(link)
+                sendEmail(email, link)
                 st.write('Please check your email for verification instructions or click on the link above')
                 st.warning('Email not verified.')
         except auth.UserNotFoundError:
@@ -177,6 +190,7 @@ def app():
                 uid = str(uuid.uuid4())  # Generate a unique UID
                 user = auth.create_user(email=email, password=password, uid=uid)
                 link = auth.generate_email_verification_link(email)
+                sendEmail(email, link)
                 st.write(link)
                 st.write('Please check your email for verification instructions or click on the link above')
                 st.success('Account created successfully! Please check your email for verification.')
