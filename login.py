@@ -121,6 +121,7 @@ def app():
                 st.session_state.signedout = True
                 st.session_state.signout = True
             else:
+                auth.send_email_verification(user.email)  # Send email verification for existing user
                 st.warning('Email not verified. Please check your email for verification instructions.')
         except auth.UidAlreadyExistsError:
             st.warning('The username is already in use.')
