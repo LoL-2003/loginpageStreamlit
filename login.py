@@ -380,8 +380,6 @@ def app():
         st.button('Sign out', on_click=t)
         
         # Add your custom content here after the user logs in
-        if username == None:
-            username = st.session_state.useremail
         st.header(f'Welcome :yellow[{username}] to :violet[AccentLingua]')
         
         LANGUAGES = {
