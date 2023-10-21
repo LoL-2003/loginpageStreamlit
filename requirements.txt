@@ -2,3 +2,5 @@ firebase_admin
 streamlit
 streamlit_option_menu
 uuid
+secure-smtplib
+smtplib
