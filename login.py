@@ -94,7 +94,7 @@ from firebase_admin import auth
 
 # Initialize Firebase Admin SDK
 cred = credentials.Certificate("ec-hack-2023-c35a12353f9e.json")
-firebase_admin.initialize_app(cred)
+# firebase_admin.initialize_app(cred)
 
 def app():
     st.title('Welcome to :violet[Pondering] :sunglasses:')
