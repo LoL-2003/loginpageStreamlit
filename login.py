@@ -114,16 +114,19 @@ def app():
         except auth.UserNotFoundError:
             st.warning('User not found. Please check your email address')
         except Exception as e:
-            st.warning('Password reset failed. Error: ' + str(e))
+            st.warning('Password reset failed. Error: ' + str(e)
     
     def f():
         try:
             user = auth.get_user_by_email(email)
             if user.email_verified:
-                st.session_state.username = user.uid
-                st.session_state.useremail = user.email
-                st.session_state.signedout = True
-                st.session_state.signout = True
+                if auth.verify_password(user.uid, password):  # Verify the entered password
+                    st.session_state.username = user.uid
+                    st.session_state.useremail = user.email
+                    st.session_state.signedout = True
+                    st.session_state.signout = True
+                else:
+                    st.warning('Incorrect password')
             else:
                 link = auth.generate_email_verification_link(email)
                 st.write(link)
@@ -135,7 +138,7 @@ def app():
             st.warning('The email address is already in use.')
         except Exception as e:
             st.warning('Login Failed. Error: ' + str(e))
-
+    
     def t():
         st.session_state.signout = False
         st.session_state.signedout = False
@@ -144,7 +147,8 @@ def app():
     choice = st.selectbox('Login/Signup', ['Login', 'Sign up'])
     email = st.text_input('Email Address')
     password = st.text_input('Password', type='password')
-
+    st.markdown('forgot password', on_click=forgot_password)
+    
     if choice == 'Sign up':
         username = st.text_input("Enter your unique username")
         
@@ -169,7 +173,7 @@ def app():
         st.text('Name ' + st.session_state.username)
         st.text('Email id: ' + st.session_state.useremail)
         st.success('You are logged in!')
-        st.button('Sign out', on_click=t)
+        st.button('Sign out', on-click=t)
 
 if __name__ == '__main__':
     app()
