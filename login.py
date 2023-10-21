@@ -150,7 +150,7 @@ import streamlit as st
 from audio_recorder_streamlit import audio_recorder
 import requests
 import os
-import time
+from time import sleep
 import glob
 from gtts import gTTS
 from googletrans import Translator
@@ -552,7 +552,7 @@ def app():
                     for char in output:
                         transcript += char
                         transcript_container.markdown(transcript)
-                        time.sleep(0.05)
+                        sleep(0.05)
                     text_Tmodel(output)
                 st.success("Transcription completed")
                 st.balloons()
@@ -583,7 +583,7 @@ def app():
                 for char in output:
                     transcript += char
                     transcript_container.markdown(transcript)
-                    time.sleep(0.05)
+                    sleep(0.05)
                 #text_Tmodel(output)
              st.success("Transcription completed")
              st.balloons()
