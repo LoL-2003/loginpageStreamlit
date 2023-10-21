@@ -104,6 +104,17 @@ def app():
         st.session_state.signedout = False
     if 'signout' not in st.session_state:
         st.session_state.signout = False
+
+    def forgot_password():
+        try:
+            link = auth.generate_password_reset_link(email)
+            st.write(link)
+            st.write('Please check your email for password reset instructions or click on the link above')
+            st.warning('Password reset link sent to your email')
+        except auth.UserNotFoundError:
+            st.warning('User not found. Please check your email address')
+        except Exception as e:
+            st.warning('Password reset failed. Error: ' + str(e))
     
     def f():
         try:
@@ -133,6 +144,7 @@ def app():
     choice = st.selectbox('Login/Signup', ['Login', 'Sign up'])
     email = st.text_input('Email Address')
     password = st.text_input('Password', type='password')
+    st.markdown('forgot password', on_click=forgot_password)
     
     if choice == 'Sign up':
         username = st.text_input("Enter your unique username")
@@ -157,7 +169,12 @@ def app():
     if st.session_state.signout:
         st.text('Name ' + st.session_state.username)
         st.text('Email id: ' + st.session_state.useremail)
+        st.success('You are logged in!')
         st.button('Sign out', on_click=t)
+
+if __name__ == '__main__':
+    app()
+
 
 if __name__ == '__main__':
     app()
