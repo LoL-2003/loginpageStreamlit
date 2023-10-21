@@ -117,8 +117,8 @@ def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
     server.starttls()
-    server.login(st.secrets[from], st.secrets[pass])
-    server.sendmail(st.secrets[from], to, content)
+    server.login(st.secrets['from'], st.secrets['pass'])
+    server.sendmail(st.secrets['from'], to, content)
     server.close()
   except:
       st.warning('unable to send mail')
