@@ -106,6 +106,7 @@ from firebase_admin import credentials
 from firebase_admin import auth
 import uuid
 import smtplib                              # use pip install smtplib
+from time import sleep
 
 # Check if the Firebase Admin SDK is already initialized
 if not firebase_admin._apps:
@@ -142,6 +143,7 @@ def app():
     def forgot_password():
         try:
             flink = auth.generate_password_reset_link(email)
+            sleep(1)
             sendEmail(email, flink)
             st.write(flink)
             st.write('Please check your email for password reset instructions or click on the link above')
@@ -164,6 +166,7 @@ def app():
             else:
                 link = auth.generate_email_verification_link(email)
                 st.write(link)
+                sleep(1)
                 sendEmail(email, link)
                 st.write('Please check your email for verification instructions or click on the link above')
                 st.warning('Email not verified.')
@@ -191,6 +194,7 @@ def app():
                 uid = str(uuid.uuid4())  # Generate a unique UID
                 user = auth.create_user(email=email, password=password, uid=uid)
                 link = auth.generate_email_verification_link(email)
+                sleep(1)
                 sendEmail(email, link)
                 st.write(link)
                 st.write('Please check your email for verification instructions or click on the link above')
