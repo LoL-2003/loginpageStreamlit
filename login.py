@@ -149,7 +149,7 @@ def app():
                 auth.update_user(user.uid, email_verified=False)
                 
                 # Send an email verification link to the user's email
-                auth.generate_email_verification_link(user.email)
+                auth.generate_email_verification_link(user.email, action_code_settings=None)
                 
                 st.success('Account created successfully! Please check your email for verification.')
                 st.markdown('Please Login using your email and password')
