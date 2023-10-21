@@ -278,7 +278,7 @@ def app():
         st.text('Name ' + st.session_state.username)
         st.text('Email id: ' + st.session_state.useremail)
         st.success('You are logged in!')
-        st.button('Sign out', on-click=t)
+        st.button('Sign out', on_click=t)
         
         # Add your custom content here after the user logs in
         st.header('Welcome, ' + st.session_state.username)
