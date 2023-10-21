@@ -123,8 +123,8 @@ def app():
             else:
                 auth.send_email_verification(user.email)  # Send email verification for existing user
                 st.warning('Email not verified. Please check your email for verification instructions.')
-        except auth.UidAlreadyExistsError:
-            st.warning('The username is already in use.')
+        except auth.EmailAlreadyExistsError:
+            st.warning('The email address is already in use.')
         except:
             st.warning('Login Failed')
 
@@ -154,8 +154,8 @@ def app():
                 st.success('Account created successfully! Please check your email for verification.')
                 st.markdown('Please Login using your email and password')
                 st.balloons()
-            except auth.UidAlreadyExistsError:
-                st.warning('The username is already in use.')
+            except auth.EmailAlreadyExistsError:
+                st.warning('The email address is already in use.')
     else:
         st.button('Login', on_click=f)
     
