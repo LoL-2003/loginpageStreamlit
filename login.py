@@ -136,7 +136,7 @@ def app():
             try:
                 uid = str(uuid.uuid4())  # Generate a unique UID
                 # Send an email verification link to the user's email
-                link = auth.generate_email_verification_link(user.email, action_code_settings=None)
+                link = auth.generate_email_verification_link(email, action_code_settings=None)
                 st.write(link)
                 st.write('Please check your email for verification instructions or click on the link above')
                 # Set email_verified to False (user's email is not verified)
