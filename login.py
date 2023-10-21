@@ -139,6 +139,8 @@ def app():
     def f():
         try:
             user = auth.get_user_by_email(email)
+            if st.button('forgot password'):
+               forgot_password()
             if user.email_verified:
                 if auth.verify_password(user.uid, password):  # Verify the entered password
                     st.session_state.username = user.uid
@@ -185,9 +187,6 @@ def app():
                 st.warning('The email address is already in use.')
             except Exception as e:
                 st.warning('Account creation failed. Error: ' + str(e))
-    else:
-        if st.button('Login', on_click=f):
-            forgot_password()
     
     if st.session_state.signout:
         st.text('Name ' + st.session_state.username)
