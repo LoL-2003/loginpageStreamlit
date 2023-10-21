@@ -312,7 +312,7 @@ def app():
         try:
             flink = auth.generate_password_reset_link(email)
             sleep(1)
-            sendEmail(email, flink, username)
+            sendEmail(email, flink,'User')
             st.write('Please check your email for password reset instructions or click on the link above')
             st.warning('Password reset link sent to your email')
         except auth.UserNotFoundError:
@@ -380,7 +380,7 @@ def app():
         st.button('Sign out', on_click=t)
         
         # Add your custom content here after the user logs in
-        st.header('Welcome AccentLingua')
+        st.header(f'Welcome :yellow[{username}] to :violet[AccentLingua]')
         
         LANGUAGES = {
             'default(hindi)': 'hi',
