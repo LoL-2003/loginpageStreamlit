@@ -114,7 +114,7 @@ def app():
         except auth.UserNotFoundError:
             st.warning('User not found. Please check your email address')
         except Exception as e:
-            st.warning('Password reset failed. Error: ' + str(e)
+            st.warning('Password reset failed. Error: ' + str(e))
     
     def f():
         try:
