@@ -114,7 +114,7 @@ def app():
         except auth.UserNotFoundError:
             st.warning('User not found. Please check your email address')
         except Exception as e:
-            st.warning('Password reset failed. Error: ' + str(e))
+            st.warning('Password reset failed. Error: ' + str(e)
     
     def f():
         try:
@@ -144,8 +144,7 @@ def app():
     choice = st.selectbox('Login/Signup', ['Login', 'Sign up'])
     email = st.text_input('Email Address')
     password = st.text_input('Password', type='password')
-    st.markdown('forgot password', on_click=forgot_password)
-    
+
     if choice == 'Sign up':
         username = st.text_input("Enter your unique username")
         
@@ -171,10 +170,6 @@ def app():
         st.text('Email id: ' + st.session_state.useremail)
         st.success('You are logged in!')
         st.button('Sign out', on_click=t)
-
-if __name__ == '__main__':
-    app()
-
 
 if __name__ == '__main__':
     app()
