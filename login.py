@@ -188,7 +188,7 @@ def app():
             except Exception as e:
                 st.warning('Account creation failed. Error: ' + str(e))
 
-     else:
+    else:
         if st.button('Login', on_click=f):
             pass
             
