@@ -247,7 +247,7 @@ def header_footer():
             """
     st.markdown(hide_st_style, unsafe_allow_html=True)
 
-st.set_page_config(page_title="EC_HACKATHON-2023")
+st.set_page_config(page_title="EC_HACKATHON-2023",layout="wide")
 # Check if the Firebase Admin SDK is already initialized
 
 header_footer()
