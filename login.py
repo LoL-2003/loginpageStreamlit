@@ -187,7 +187,11 @@ def app():
                 st.warning('The email address is already in use.')
             except Exception as e:
                 st.warning('Account creation failed. Error: ' + str(e))
-    
+
+     else:
+        if st.button('Login', on_click=f):
+            pass
+            
     if st.session_state.signout:
         st.text('Name ' + st.session_state.username)
         st.text('Email id: ' + st.session_state.useremail)
