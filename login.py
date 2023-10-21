@@ -173,7 +173,7 @@ def app():
         st.text('Name ' + st.session_state.username)
         st.text('Email id: ' + st.session_state.useremail)
         st.success('You are logged in!')
-        st.button('Sign out', on-click=t)
+        st.button('Sign out', on_click=t)
 
 if __name__ == '__main__':
     app()
