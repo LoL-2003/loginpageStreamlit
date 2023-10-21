@@ -112,10 +112,6 @@ if not firebase_admin._apps:
     cred = credentials.Certificate("ec-hack-2023-c35a12353f9e.json")
     firebase_admin.initialize_app(cred)
 
-def verify_password(uid, password):
-    user = auth.get_user(uid)
-    return user.password == password
-
 def app():
     st.title('Welcome to :violet[Pondering] :sunglasses:')
     
@@ -124,6 +120,8 @@ def app():
         st.session_state.username = ''
     if 'useremail' not in st.session_state:
         st.session_state.useremail = ''
+    if 'password' not in st.session_state:
+        st.session_state.password = ''
     if 'signedout' not in st.session_state:
         st.session_state.signedout = False
     if 'signout' not in st.session_state:
@@ -144,13 +142,10 @@ def app():
         try:
             user = auth.get_user_by_email(email)
             if user.email_verified:
-                if verify_password(user.uid, password):  # Verify the entered password
                     st.session_state.username = user.uid
                     st.session_state.useremail = user.email
                     st.session_state.signedout = True
                     st.session_state.signout = True
-                else:
-                    st.warning('Incorrect password')
                     if st.button('forgot password'):
                        forgot_password()
             else:
@@ -204,4 +199,3 @@ def app():
 
 if __name__ == '__main__':
     app()
-
